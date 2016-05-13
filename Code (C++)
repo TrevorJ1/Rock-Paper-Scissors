@@ -1,0 +1,216 @@
+
+//Rock, Paper, Scissors Game
+//
+//Created by Trevor Perez 03/11/2016
+//
+
+
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+
+using namespace std;
+
+//Create function prototypes
+int generateComputerNumber();
+int getUserNumber();
+void getResults(int,int);
+
+
+//main function
+int main()
+{
+	//Create Variables
+	int computerValue, userValue;	
+	bool userWon;
+	char userResponse;
+	//Introduce Program
+	cout << "Welcome to the rock paper scissors game!\n";
+	cout << "Would you like to play? Enter y or n\n";
+	cout << "Enter your choice now:\n";
+	userResponse = cin.get();
+	cin.ignore();
+	//validation incase user doesnt press y or n
+	while ((userResponse != 'n') && (userResponse != 'N') &&
+		(userResponse != 'Y') && (userResponse != 'y'))
+	{
+		cout << "Invalid choice.\n";
+        	cout << "Would you like to play? Enter y or n\n";
+	        userResponse = cin.get();
+		cin.ignore();
+		
+	}
+	while ((userResponse == 'y') || (userResponse == 'Y'))
+	{
+		//call generateNumber() to get a random #
+		computerValue = generateComputerNumber();
+		//Call function getUserNumber() to get a 
+		//# from te user
+		userValue = getUserNumber();
+		
+		//Call function getResults()
+		//To determine who will win
+		getResults(computerValue, userValue);
+		
+		//Ask user if they want to play again	
+		cout << "Would you like to play again?\n";
+		cout << "Enter y or n\n";
+		cin >> userResponse;
+		cin.ignore();
+	}
+	return 0;
+}
+
+
+
+//***********************
+//Function Definition getResults()
+//This function will use a switch 
+//statement to determine the winner
+//************************
+void getResults(int computerValue2, int userValue2)
+{
+        
+	//Switch statement
+        switch(userValue2)
+        {
+                case 1://rock
+                {
+                        //if statement
+			if(computerValue2 == 1) //1=rock
+			{
+				cout << "You and the computer have entered: Rock\n";
+				cout << "Tie!\n";
+				return;
+			}
+			if(computerValue2 == 2) //2=paper
+			{
+       				 //Show the user what the computer has picked
+        			cout << "The computer has picked: Paper "<< endl;
+
+				cout << "You have lost\n";
+				cout << "Paper beats rock!\n";
+			}
+			if(computerValue2 == 3) //3 = scissors
+                        {         //Show the user what the computer has picked
+                                cout << "The computer has picked: Scissors "<< endl;
+			
+			
+				cout << "You have won!\n";
+				cout << "Rock beats scissors\n";
+			}
+			break;
+                }
+
+                case 2://paper
+                {
+                        //if statement
+                        if(computerValue2 == 1) //1=rock
+                        {
+                                cout << "The computer has picked: Rock " << endl;
+                                cout << "You have won\n";
+				cout << "Paper beats rock\n";
+                        
+                        }
+                        if(computerValue2 == 2) //2=paper
+                        {
+                                 //Show the user what the computer has picked
+                                cout << "You and the computer have picked: Paper\n";
+				cout << "Tie!\n";
+				return;
+                        }
+                        if(computerValue2 == 3) //3 = scissors
+			{
+                                 //Show the user what the computer has picked
+                                cout << "The computer has picked: Scissors "<< endl;
+
+                        
+                                cout << "You have Lost!\n";
+                                cout << "Scissors beats paper!\n";
+                        }
+                        break;
+                }
+
+                case 3://scissors
+                {
+                        //if statement
+                        if(computerValue2 == 1) //1=rock
+                        {
+                                cout << "The computer has picked: Rock " << endl;
+                                cout << "You have lost!\n";
+                                cout << "Rock beats Scissors!\n";
+
+                        }
+                        if(computerValue2 == 2) //2=paper
+                        {
+                                cout << "The computer has picked: Paper " << endl;
+                                cout << "You have Won!\n";
+                                cout << "Scissors beats paper!\n";
+
+
+                        }
+                        if(computerValue2 == 3) //3 = scissors
+                        {
+                                 //Show the user what the computer has picked
+                                cout << "You and the computer have picked: Scissors\n";
+                                cout << "Tie!\n";
+                                return;
+
+                        }
+                        break;
+                }
+
+		case 4://Exit program
+		{
+			cout << "Thanks! Play again later\n";
+			exit(0);
+		}
+
+        }
+//	return 0;
+	
+}
+
+//**************************
+//Function definition getUserNumber()
+//this function will get either
+//rock,paper,or scissors from user
+//displayed in a menu
+//***************************
+int getUserNumber()
+{
+	//Create Variables
+	int userValue;
+	//Prompt user to enter a value
+		cout << "1) Rock\n";
+		cout << "2) Paper\n";
+		cout << "3) Scissors\n";
+		cout << "4) Quit\n";
+		cin >> userValue;
+	//Input validation
+	while((userValue < 1) || (userValue > 4))
+	{
+		cout << "Invalid Choice. Try again\n";
+		cin >> userValue;
+	}
+	return userValue;
+}
+//*************************
+//Function definition gnerateComputerNumber()
+//this function will generate a random
+//# 1-3
+//***************************
+int generateComputerNumber()
+{
+	//Create variables
+	int randomNumber;
+	const int MIN_VALUE = 1, MAX_VALUE = 3;
+        //Create random seed valye
+        unsigned int seed = time(0);
+        srand(seed);
+	//Generate random # 1-3
+	randomNumber = (rand() % (MAX_VALUE - MIN_VALUE + 1) + MIN_VALUE);
+	
+
+
+}
